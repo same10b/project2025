@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grid Alignment Cycle</title>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    // 入力イベントリスナー
+    document.addEventListener('DOMContentLoaded', () => {
+      const inputText = document.getElementById('inputText');
+
+      // リアルタイムでテキストを送信
+      inputText.addEventListener('input', () => {
+        const text = inputText.value;
+        console.log('Sending text:', text); // サーバーに送信する前に確認
+        socket.emit('inputText', text); // サーバーに送信
+      });
+    });
+  </script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #eee;
+      font-family: Arial, sans-serif;
+      height: 100vh; /* 画面全体の高さを100%に設定 */
+      display: flex;
+      justify-content: center;
+      align-items: center; /* 中央に配置 */
+    }
+
+    /* 入力フォームのスタイル */
+    #inputPanel {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);  /* 水平中央に配置 */
+      background: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      z-index: 10;
+      width: 90%;  /* 幅を90%に設定 */
+      max-width: 400px;  /* 最大幅を400pxに設定 */
+      box-sizing: border-box;
+      transition: all 0.3s ease; /* アニメーションを追加 */
+    }
+
+    textarea {
+      width: 94%;
+      height: 80px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      resize: none; /* サイズ変更無効 */
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <!-- 入力フォーム -->
+  <div id="inputPanel">
+    <textarea id="inputText" placeholder="文字を入力してください"></textarea><br><br>
+    <!-- 送信ボタンは削除 -->
+  </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>出力ページ</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #eee;
+      font-family: Arial, sans-serif;
+      height: 100vh; /* 画面全体の高さを100%に設定 */
+      display: flex;
+      justify-content: center;
+      align-items: center; /* 中央に配置 */
+    }
+    canvas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 100%;
+      max-height: 90%;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    let socket = io();
+
+    // サーバーとの接続確認
+    socket.on('connect', () => {
+      console.log('Connected to server');  // 接続確認
+    });
+
+    // サーバーから入力テキストを受け取って描画する
+    socket.on('inputText', (text) => {
+      console.log('Received text:', text);  // サーバーからのテキスト受信確認
+    });
+  </script>
+  <script src="sketch.js"></script>
+</head>
+<body>
+ 
+</body>
+</html>
