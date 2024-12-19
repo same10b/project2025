@@ -1,7 +1,7 @@
 let displayBlocks = []; // {x, y, color, layer} を要素にもつ配列。1文字につき1ブロック
 let currentText = "";   // 現在のテキスト
 let lastText = "";      // 前回のテキスト
-let blockSize = 5;      // ブロックのサイズ
+let blockSize = 15;      // ブロックのサイズ
 let blockSpacing = 15;  // ブロックの間隔
 let accumulatedText = ""; // 累積されたテキスト
 let layerCount = 0; // 新しいレイヤーが追加されるごとに増加
